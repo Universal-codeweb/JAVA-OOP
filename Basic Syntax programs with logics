@@ -1,0 +1,391 @@
+//library system logics
+class Book{
+    private String id;
+    private String title;
+    private String author;
+    private int copies;
+    private static int totalBooks =0;
+    public Book(){
+        id=null;
+        title=null;
+        author=null;
+        copies=0;
+    }
+    public Book(String num,String titles, String auth, int copy){
+        id=num;
+        title=titles;
+        author=auth;
+        copies=copy;
+        totalBooks++;
+    }
+    public void displayBook(){
+        System.out.println(id);
+        System.out.println(author);
+        System.out.println(copies);
+    }
+    public static int getTotalBooks(){
+        return totalBooks;
+    }
+}
+ class Member{
+    private static int idCounter=1000;
+    private int mid;
+    private String name;
+    private String email;
+    private static int totalMrs=0;
+    public Member(String nm,String mail)
+    {
+        this.mid=++idCounter;
+        name=nm;
+        email=mail;
+        totalMrs++;
+    }
+    public void displayMember(){
+        System.out.println(mid+" "+name+" "+email);
+    }
+    public static int getTotalMrs(){
+        return totalMrs;
+    }
+}
+public class LibrarySystem{
+    public static void main(String args[]){
+        Book b1=new Book("1A","Adventure","anonymous",10);
+        Book b2=new Book("1B","Journey to the end of the earth","anonymous",20);
+        Member m1=new Member("Lusiyi","lu@gmail.com");
+        Member m2=new Member("Ding yuxi","infinity@gmail.com");
+        b1.displayBook();
+        b2.displayBook();
+        m1.displayMember();
+        m2.displayMember();
+        System.out.println("Total Books:"+Book.getTotalBooks());
+        System.out.println("Total Members:"+ Member.getTotalMrs());
+    }
+}
+    
+//Banking System
+abstract class BankAccount{
+protected String accountNumber;
+protected String name;
+protected double balance;
+public BankAccount(String accounNumber, String name, double balance){
+    this.accountNumber=accountNumber;
+    this.name=name;
+    this.balance=balance;
+}
+public void deposit(double amount){
+    if(amount>0){
+        balance+=amount;
+        System.out.println("Deposited $"+amount+ " into"+ accountNumber);
+    }
+else{
+    System.out.println("invlaid deposit amount");
+}}
+public boolean withdraw(double amount){
+    if(amount>0 && amount<= balance){
+        balance-=amount;
+        System.out.println("Insufficient funds or invalid amount");
+        return false;
+    }
+    else{
+        System.out.println("Insufficient funds or invalid amount");
+        return false;
+    }
+}
+abstract double calculateInterest();
+abstract void displayInfo();
+}
+class SavingsAccount extends BankAccount{
+    public SavingsAccount(String accountNumber,String name, double balance){
+        super(accountNumber,name,balance);
+    }
+    public double calculateInterest(){
+        return (balance*0.04);
+    }
+    public void displayInfo(){
+        System.out.println("Savings account- \n Account Number:"+accountNumber+"\n name"+ name+"\n balance"+balance+"\n Interest:"+calculateInterest());
+    }
+}
+class CurrentAccount extends BankAccount{
+    public CurrentAccount(String accountNumber, String name,double balance){
+        super(accountNumber,name, balance);
+    }
+    public double calculateInterest(){
+        return (balance*0.02);
+    }
+    public void displayInfo(){
+        System.out.println("CurrentAccount- \n accountNumber:"+accountNumber+"\nName:"+ name+"\nBalance:"+balance+"\n Interest:"+calculateInterest());
+    }
+    }
+    public class BankSystem{
+        public static  void main(String[]args){
+            SavingsAccount S= new SavingsAccount("888a","max",10000);
+            CurrentAccount C=new CurrentAccount("777b","Ben",20000);
+            S.displayInfo();
+            C.displayInfo();
+            S.withdraw(2000);
+            C.deposit(2000);
+        }
+    }
+
+//Vehicle System
+abstract class Vehicle{
+    protected String vehicleNumber;
+    protected String brand;
+    protected double dailyRate;
+    public Vehicle(String vehicleNumber,String brand , double dailyRate){
+        this.vehicleNumber=vehicleNumber;
+        this.brand=brand;
+        this.dailyRate= dailyRate;
+    }
+    public void vehicleDetails(){
+        System.out.println("Vehicle Num,ber:"+vehicleNumber);
+        System.out.println("Brand:"+brand);
+        System.out.println("daily Rate:"+ dailyRate);    }
+abstract double calculateRent();
+abstract void printRentDetails();
+}
+ class Car extends Vehicle{
+    protected int days;
+    public Car(String vehicleNumber,String brand, double dailyRate,int days){
+        super(vehicleNumber,brand,dailyRate);
+        this.days=days;
+    }
+    public double calculateRent(){
+        return dailyRate*days;
+    }
+    public void printRentDetails(){
+        System.out.println("car - \nVehicleNumber:"+vehicleNumber+"\nbrand:"+ brand+"\ndaily rate:"+dailyRate+"rent:"+ calculateRent());
+    }}
+ class Bike extends Vehicle{
+    protected int days;
+    public Bike(String vehicleNumber,String brand, double dailyRate, int days){
+        super(vehicleNumber, brand,dailyRate);
+        this.days=days;
+    }
+    public double calculateRent(){
+        return(dailyRate*days)-0.10;
+    }
+    public void printRentDetails(){
+        System.out.println("Bike- \n Vehicle Name:"+vehicleNumber+"\n brand:"+ brand+"\nDailyRate:"+dailyRate+" \n Rent:"+calculateRent());
+    }
+}
+public class VehicleSystem{
+    public static void main( String[] args){
+        Car c = new Car("001A","BMW",1000,5);
+        Bike B= new Bike("012B","splendor",2000,10);
+        c.vehicleDetails();
+        c.printRentDetails();
+        B.vehicleDetails();
+        B.printRentDetails();
+    }
+}
+
+//Employee Management System
+abstract class Employee{
+    protected String name;
+    protected int empId;
+    protected double basicSalary;
+
+public Employee(String name, int empId, double basicSalary){
+    this.name=name;
+    this.empId=empId;
+    this.basicSalary=basicSalary;
+}
+public String getname(){
+    return name;
+}
+public void setname(String name){
+    this.name=name;
+}
+public int getempId(){
+    return empId;
+}
+public void setempId(int empId){
+    this.empId=empId;
+}
+public double getBasicSalary(){
+    return basicSalary;
+}
+public void setBasicSalary(double basicSalary){
+    this.basicSalary=basicSalary;
+}
+abstract double calculateSalary();
+abstract void displayinfo();
+}
+class FullTimeEmployee extends Employee{
+    public FullTimeEmployee(String name, int empId , double basicSalary){
+        super(name, empId, basicSalary);
+    }
+    public double calculateSalary(){
+        return basicSalary+(0.2*basicSalary);
+    }
+    public void displayinfo(){
+        System.out.println("Full time employee- Name:"+ name+"Employee Id:"+empId+"Baqsic Salary:"+calculateSalary());
+    }
+}
+class ParTimeEmployee extends Employee{
+    protected double hourlyRate;
+    protected  int hoursWorked;
+    public ParTimeEmployee(String name, int empId, double basicSalary, double hourlyRate, int hoursWorkled){
+        super(name,empId,basicSalary);
+        this.hourlyRate=hourlyRate;
+        this.hoursWorked= hoursWorked;
+    }
+    public double calculateSalary(){
+        return basicSalary+(hourlyRate*hoursWorked);
+    }
+    public void displayinfo(){
+        System.out.println("Partime Employee- Name:"+name+"Employee Id:"+empId+"Basic Salary:"+calculateSalary());
+    }
+}
+public class EmployeeManagementSystem{
+    public static void main(String[] args){
+        Employee e = new Employee();
+        FullTimeEmployee F= new FullTimeEmployee("Max",999,50000);
+        ParTimeEmployee P= new ParTimeEmployee("Ben", 998,50000,1000,5);
+        F.displayinfo();
+        P.displayinfo();
+    }
+} 
+
+//Online Shopping System
+abstract class Product{
+    protected String productId;
+    protected String name;
+    protected double price;
+
+    public Product(String productId, String name, double price){
+        this.productId =productId;
+        this.name= name;
+        this.price=price;
+    }
+    public void productDetails(){
+        System.out.println("productId:"+productId);
+        System.out.println("productname:"+ name);
+    System.out.println("price:"+price);
+}
+    public abstract double calculateDiscountPrice();
+    public abstract void displayDetails();
+}
+class Electronic extends Product{
+    public Electronic(String productId, String name, double price){
+        super(productId, name,price);
+    }
+    public double calculateDiscountPrice(){
+        return (price-0.1);
+    }
+    public void displayDetails(){
+        System.out.println("Electronics- \nproductId:"+productId+"\nname:"+name+"\nprice:"+price+"\nDiscount:"+calculateDiscountPrice());
+     }}
+class Clothing extends Product{
+    public Clothing(String productId, String name, double price){
+        super(productId, name, price);
+    }
+    public double calculateDiscountPrice(){
+        return (price-0.15);
+    }
+    public void displayDetails(){
+        System.out.println("Clothing- \n productId:"+productId+"\n name:"+name+"\n price:"+price+"\n Discount:"+ calculateDiscountPrice());
+    }
+}
+public class OnlineSystem{
+    public static void main (String[] args){
+        Electronic E= new Electronic("Zeb47", "headphone",2000);
+        Clothing C= new Clothing("LV001","Wide leg Pant", 1000);
+        E.productDetails();
+        C.productDetails();
+        E.displayDetails();
+        C.displayDetails();
+    }
+}
+
+//Exam System
+abstract class Exam{
+    protected String examId;
+    protected String subject;
+    protected double totalMarks;
+    public Exam( String examId, String subject, double totalMarks){
+        this.examId=examId;
+        this.subject=subject;
+        this.totalMarks=totalMarks;   
+    }
+    public void examDetails(){
+        System.out.println("ExamId:"+examId);
+        System.out.println("Subject:"+subject);
+        System.out.println("totalMarks:"+totalMarks);
+    }
+    public abstract boolean evaluateResult();
+    public abstract void displayTheResult(); 
+        
+    }
+    class TheoryExam extends Exam{
+        public TheoryExam(String examId, String subject, double totalMarks){
+            super(examId, subject,totalMarks);
+    }
+    public boolean evaluateResult(){
+        if(totalMarks>=40){
+            System.out.println("pass");
+            return true;
+        }
+        else{
+            System.out.println("fail");
+            return false;
+        }
+    }
+    public void displayTheResult(){
+            System.out.println("Theory Exam- \nExamId:"+examId+"\nSubject:"+subject+"\nTotal Marks:"+totalMarks+"Result:"+evaluateResult());
+        }
+    }
+    class PracticalExam extends Exam{
+        public PracticalExam(String examId, String subject,double totalMarks){
+        super(examId,subject,totalMarks);
+        }
+        public boolean evaluateResult(){
+            if(totalMarks>=50){
+                System.out.println("pass");
+                return true;
+            }
+            else{
+                System.out.println("fail");
+                return false;
+            }
+        }
+        public void displayTheResult(){
+           System.out.println("Practical Exam-\nExam Id:"+examId+"\nSubject"+subject+"\nTotal Marks:"+totalMarks+"Result:"+evaluateResult());  
+    }
+}
+    public class ExamSystems{
+        public static void main(String[] args){
+            TheoryExam TE=new TheoryExam("20AB","Physics",80);
+            PracticalExam PE= new PracticalExam("20BA","Physics",90);
+            TE.examDetails();
+            TE.displayTheResult();
+            PE.examDetails();
+            PE.displayTheResult();
+        }
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+    
+
