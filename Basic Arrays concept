@@ -1,0 +1,96 @@
+//Student Grade
+import java.util.*;
+public class StudentGrade {
+    public static void main(String[] args){
+        System.out.println("Enter the size of the array:");
+        Scanner S= new Scanner(System.in);
+        int N=S.nextInt();
+        int marks[]=new int [N];
+        for(int i=0;i<N;i++){
+            marks[i]=S.nextInt();
+        }
+        int total=0,max= marks[0],min=marks[0],count=0;
+        for(int i=0;i<N;i++){
+            if(marks[i]<min){
+                min=marks[i];
+            }
+            if(marks[i]>max){
+                max=marks[i];
+            }
+        }
+        for(int i=0;i<N;i++){
+            total=total+marks[i];  
+        }
+        double average= total/N;
+        for(int i=0;i<N;i++){
+            if(marks[i]> average){
+                count++;
+            }
+        }
+        System.out.println("Average marks:"+ average);
+        System.out.println("Highest marks:"+max);
+        System.out.println("Lowestt Marks:"+min);
+        System.out.println("Students scored abovee aveerage:"+count);
+    }    
+}
+// Temperature Monitor
+import java.util.Scanner;
+
+public class TemperatureMonitor {
+    public static void main(String []args){
+         System.out.println("Enter the number of days:");
+        Scanner S= new Scanner(System.in);
+        int N=S.nextInt();
+        double tem[]=new double [N];
+        for(int i=0;i<N;i++){
+            tem[i]=S.nextDouble();
+    }
+    double max=tem[0],min=tem[0],totalTem=0.0;
+    int hotdays=0;
+    for(int i=0;i<N;i++){
+        totalTem = totalTem+tem[i];
+        if(tem[i]<min) min=tem[i];
+        if(tem[i]>max) max=tem[i];  
+    }
+    double avgTem= totalTem/N;
+    for(double t : tem){
+        if(avgTem<t) hotdays++;
+    }
+    System.out.println("Average Temperature: "+ avgTem);
+    System.out.println("Hottest Temperature: "+ max);
+    System.out.println("Coldest Temperature: "+ min);
+    System.out.println("Number of Hot days: "+ hotdays); 
+}
+}
+//Inventory Stock
+import java.util.Scanner;
+public class InventoryStock {
+    public static void main(String []args){
+         System.out.println("Enter the number of products:");
+        Scanner S= new Scanner(System.in);
+        int N=S.nextInt();
+        int stocks[]=new int [N];
+        for(int i=0;i<N;i++){
+            stocks[i]=S.nextInt();
+        }
+        int minStock=stocks[0],minIndex=0;
+        boolean OutOfStock=false;
+        for(int i=0;i<N;i++){
+            if(stocks[i]<minStock){
+                minStock=stocks[i];
+                minIndex=i;
+            }
+            if(stocks[i]==0){
+                OutOfStock=true;
+            }
+        }
+        System.out.println("Product with lowest stock= Product"+(minIndex+1)+"(Stock:"+minStock+")");
+        System.out.println("Is any Producr Out of Stock? "+(OutOfStock ? "yes":"No"));
+    }    
+}
+
+
+
+
+
+
